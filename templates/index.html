@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='./static/images/Brain.png'>
+    <script src="https://kit.fontawesome.com/34d4f625c3.js" crossorigin="anonymous"></script>
+    <title>Genius</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Titillium+Web&display=swap" rel="stylesheet">
+    <link href="./static/style.css" type="text/css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <img class="background_img" src="./static/images/hexagon-1.jpg">
+<div class="container_main">
+    <h1>How Can I Help ?</h1>
+<form method="POST" action="/question">
+    <textarea type="text" name="question">{{asked_question}}</textarea>
+</form>
+    <div class="container_answer">{{answered}}</div>
+    <div class="container_options">
+        <button class="far fa-question-circle" type="submit" title="Ask"></button>
+        <a class="fas fa-microphone" title="Ask by voice"></a>
+        <a class="fas fa-volume-up" href="/listen" title="Listen"></a>
+        <a class="fas fa-info-circle" href="/info" title="Info"></a>
+    </div>
+</div>
+</body>
+<script>
+    let mic = document.querySelector('.fa-microphone')
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+    $(mic).on('mousedown mouseup',(e)=>{
+        if (e.type == 'mousedown'){
+            recognition.start();
+            recognition.addEventListener('result',e =>{
+            transcript = Array.from(e.results).map(result=> result[0]).map(result=>result.transcript).join('')
+            recognition.addEventListener('end',recognition.start)
+            });
+        }else{
+            recognition.addEventListener('end',recognition.stop)
+            recognition.stop()
+            fetch('/speak',{
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type':'application/json',
+
+                },
+                body: JSON.stringify(transcript)
+            }).then(res=>window.location.replace('/voice_question'))
+        }
+    })
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</html>
