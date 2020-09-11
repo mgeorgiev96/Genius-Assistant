@@ -120,7 +120,6 @@ virtualenv==20.0.30
 websocket-client==0.57.0
 Werkzeug==1.0.1
 wikipedia==1.4.0
-win10toast==0.9
 wolframalpha==4.0.0
 wrapt==1.12.1
 xmltodict==0.12.0
