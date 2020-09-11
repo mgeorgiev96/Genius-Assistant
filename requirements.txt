@@ -73,7 +73,6 @@ protobuf==3.13.0
 py==1.9.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-PyAudio @ file:///C:/Users/Owner/pipwin/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
 PyAutoGUI==0.9.50
 PyGetWindow==0.0.8
 pyjsparser==2.7.1

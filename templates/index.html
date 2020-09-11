@@ -17,10 +17,10 @@
     <h1>How Can I Help ?</h1>
 <form method="POST" action="/question">
     <textarea type="text" name="question">{{asked_question}}</textarea>
+    <button class="far fa-question-circle" type="submit" title="Ask"></button>
 </form>
     <div class="container_answer">{{answered}}</div>
     <div class="container_options">
-        <button class="far fa-question-circle" type="submit" title="Ask"></button>
         <a class="fas fa-microphone" title="Ask by voice"></a>
         <a class="fas fa-volume-up" href="/listen" title="Listen"></a>
         <a class="fas fa-info-circle" href="/info" title="Info"></a>
