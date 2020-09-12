@@ -92,7 +92,8 @@ def ask_question():
 @app.route('/info')
 def show_web_page():
     if topic_link:
-        webbrowser.open(topic_link)
+        #webbrowser.open(topic_link)
+        webbrowser.open(topic_link, new=1)
     else:
         pass
     return render_template('index.html',answered=info)
