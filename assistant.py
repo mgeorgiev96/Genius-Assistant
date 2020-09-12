@@ -28,7 +28,7 @@ def listen_voice():
         global topic_link
         question_by_voice = voice
         try:
-            app_id = '63H6YQ-LHJQUUR7TL'
+            app_id = os.environ.get('APP_ID')
             client = wolframalpha.Client(app_id)
             res = client.query(voice)
             answer = next(res.results).text
@@ -54,7 +54,11 @@ def voice_question_answered():
 @app.route('/listen')
 def speak_answer():
     global info
-    os.remove('voice.mp3')
+    try:
+        f = open('voice.mp3')
+        os.remove('voice.mp3')
+    except:
+        pass
     tts = gtts.gTTS(info)
     tts.save('voice.mp3')
     playsound('voice.mp3')
