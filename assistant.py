@@ -34,7 +34,7 @@ def listen_voice():
             answer = next(res.results).text
             info = answer
             try:
-                topic_page = wikipedia.page(question)
+                topic_page = wikipedia.page(voice)
             except:
                 pass
         except:
@@ -77,7 +77,7 @@ def ask_question():
     global info
     global topic_link
     try:
-        app_id = '63H6YQ-LHJQUUR7TL'
+        app_id = os.environ.get('APP_ID')
         client = wolframalpha.Client(app_id)
         res = client.query(question)
         answer = next(res.results).text
