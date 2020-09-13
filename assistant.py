@@ -2,6 +2,7 @@ import wikipedia
 import wolframalpha
 from flask import Flask, render_template, request, redirect
 import gtts
+import pyttsx3
 from playsound import playsound
 import os
 import json
@@ -53,14 +54,9 @@ def voice_question_answered():
 @app.route('/listen')
 def speak_answer():
     global info
-    try:
-        f = open('voice.mp3')
-        os.remove('voice.mp3')
-    except:
-        pass
-    tts = gtts.gTTS(info)
-    tts.save('voice.mp3')
-    playsound('voice.mp3')
+    engine = pyttsx3.init()
+    engine.say(info)
+    engine.runAndWait()
     return render_template('index.html', answered=info)
 
 #Renders home page
