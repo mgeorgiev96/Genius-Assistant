@@ -4,7 +4,6 @@ from flask import Flask, render_template, request, redirect
 import gtts
 from playsound import playsound
 import os
-import webbrowser
 import json
 
 #Answer about the user question
@@ -92,8 +91,7 @@ def ask_question():
 @app.route('/info')
 def show_web_page():
     if topic_link:
-        #webbrowser.open(topic_link)
-        webbrowser.open(topic_link, new=1)
+        os.system(f"start \"\" {topic_link}")
     else:
         pass
     return render_template('index.html',answered=info)
