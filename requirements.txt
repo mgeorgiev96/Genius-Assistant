@@ -16,7 +16,6 @@ MarkupSafe==1.1.1
 more-itertools==8.5.0
 playsound==1.2.2
 pyttsx3==2.90
-pywin32==228
 requests==2.24.0
 ruamel.yaml==0.16.12
 ruamel.yaml.clib==0.2.2
