@@ -54,9 +54,10 @@ def voice_question_answered():
 @app.route('/listen')
 def speak_answer():
     global info
-    engine = pyttsx3.init()
-    engine.say(info)
-    engine.runAndWait()
+    tts = gtts.gTTS(text=info,lang='en')
+    file = 'voice.mp3'
+    tts.save(file)
+    playsound(file)
     return render_template('index.html', answered=info)
 
 #Renders home page
