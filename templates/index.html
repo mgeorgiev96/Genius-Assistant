@@ -22,13 +22,21 @@
     <div class="container_answer">{{answered}}</div>
     <div class="container_options">
         <a class="fas fa-microphone" title="Ask by voice"></a>
-        <a class="fas fa-volume-up" href="/listen" title="Listen"></a>
+        <a class="fas fa-volume-up" title="Listen"></a>
         <a class="fas fa-info-circle" href="/info" title="Info"></a>
     </div>
 </div>
 </body>
 <script>
     let mic = document.querySelector('.fa-microphone')
+    let speakButton = document.querySelector('.fa-volume-up')
+    let textAnswer = document.querySelector('.container_answer')
+
+    const textToSpeech = ()=>{
+        console.log('here')
+        console.log(textAnswer.innerHTML)
+        responsiveVoice.speak(textAnswer.innerHTML)
+    }
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     const recognition = new SpeechRecognition();
@@ -54,7 +62,9 @@
             }).then(res=>window.location.replace('/voice_question'))
         }
     })
+    speakButton.addEventListener('click',textToSpeech)
 </script>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=1Vq8Hx56"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
