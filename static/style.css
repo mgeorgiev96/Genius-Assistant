@@ -5,6 +5,23 @@ body,html{
     padding: 0;
 }
 
+.spinner-border{
+    margin-bottom: 10px;
+    font-size: 0.6rem;
+    text-shadow: 0 0 0 25px white,
+    0 0 0 75px white,
+    0 0 0 100px white,
+    0 0 0 200px white;
+    display: none;
+}
+
+.publicLink{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 h1{
     font-family: 'Titillium Web', sans-serif;
     margin-bottom: 2%;

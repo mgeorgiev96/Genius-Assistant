@@ -1,5 +1,6 @@
 import wikipedia
 import wolframalpha
+import requests
 from flask import Flask, render_template, request, redirect
 import gtts
 import pyttsx3
@@ -49,7 +50,7 @@ def listen_voice():
 
 @app.route('/voice_question')
 def voice_question_answered():
-    return render_template('index.html',answered=info,asked_question=question_by_voice)
+    return render_template('index.html',answered=info,asked_question=question_by_voice,public_link=topic_link)
 
 #Converts text to speech
 @app.route('/listen')
@@ -91,16 +92,12 @@ def ask_question():
         except wikipedia.PageError as e:
             info = f'No matches found for \"{question}\".'
 
-    return render_template('index.html',answered=info,asked_question=question)
+    return render_template('index.html',answered=info,asked_question=question,public_link=topic_link)
 
 #Opens web page with additional info
-@app.route('/info')
+@app.route('/info', methods=['GET','POST'])
 def show_web_page():
-    if topic_link:
-        os.system(f"start \"\" {topic_link}")
-    else:
-        pass
-    return render_template('index.html',answered=info)
+    return render_template('index.html',public_link=topic_link)
 
 
 if __name__ == '__main__':
