@@ -23,7 +23,7 @@
     <div class="container_options">
         <a class="fas fa-microphone" title="Ask by voice"></a>
         <a class="fas fa-volume-up" title="Listen"></a>
-        <a class="fas fa-info-circle" href="/info" title="Info"></a>
+        <a class="fas fa-info-circle" title="Info"></a>
     </div>
 </div>
 </body>
@@ -31,10 +31,13 @@
     let mic = document.querySelector('.fa-microphone')
     let speakButton = document.querySelector('.fa-volume-up')
     let textAnswer = document.querySelector('.container_answer')
+    let information = document.querySelector('.fa-info-circle')
+
+    const receiveInfo = ()=>{
+        fetch('/info')
+    }
 
     const textToSpeech = ()=>{
-        console.log('here')
-        console.log(textAnswer.innerHTML)
         responsiveVoice.speak(textAnswer.innerHTML)
     }
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -63,6 +66,7 @@
         }
     })
     speakButton.addEventListener('click',textToSpeech)
+    information.addEventListener('click',receiveInfo)
 </script>
 <script src="https://code.responsivevoice.org/responsivevoice.js?key=1Vq8Hx56"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

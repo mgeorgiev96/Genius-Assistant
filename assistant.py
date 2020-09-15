@@ -6,6 +6,7 @@ import pyttsx3
 from playsound import playsound
 import os
 import json
+import ctypes
 
 #Answer about the user question
 info = ''
@@ -79,9 +80,17 @@ def ask_question():
         answer = next(res.results).text
         info = answer
     except:
-        wiki = wikipedia.summary(question)
-        info = wiki
-    topic_link=wikipedia.page(question).url
+        try:
+            wiki = wikipedia.summary(question)
+            info = wiki
+            topic_link=wikipedia.page(question).url
+        except wikipedia.DisambiguationError as e:
+            wiki = e.options[0]
+            info = wiki
+            topic_link=wikipedia.page(e.options[0]).url
+        except wikipedia.PageError as e:
+            info = f'No matches found for \"{question}\".'
+
     return render_template('index.html',answered=info,asked_question=question)
 
 #Opens web page with additional info
